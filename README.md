@@ -4,7 +4,7 @@ A Java Server acts as a message broker, routing reports between clients using th
 
 
 # Architecture
-C++ Client communicates STOMP frames over TCP to a Java server that handles all clients, and sends SQL strings of user activity documentation to a Python SQL server that operates a SQLite database.
+C++ Client communicates STOMP frames over TCP to a Java server that handles all clients, and records user activity to a SQLite database through a Python SQL server.
 
 ## Server Side
 **Framework (provided)**
@@ -55,6 +55,8 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 
 
 # How to Run
+- Requires: Java + Maven, C++ with Boost library, Python 3.
+- Start the components in the following order:
 **SQL Server:**
 ```bash
 python3 data/sql_server.py
