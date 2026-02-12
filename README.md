@@ -56,7 +56,7 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 
 # How to Run
 - Requires: Java + Maven, C++ with Boost library, Python 3.
-- Start the components in the following order:
+- Start the components in the following order:\
 **SQL Server:**
 ```bash
 python3 data/sql_server.py
