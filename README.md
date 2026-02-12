@@ -2,6 +2,7 @@
 This project is a Community-led World Cup subscription system, where C++ Clients can subscribe to game channels, report, and receive updates from one another about the games.
 A Java Server acts as a message broker, routing reports between clients using the STOMP protocol, while maintaining a database of users' activity, which is implemented in SQLite.
 
+
 # Architecture
 C++ Client communicates STOMP frames over TCP to a Java server that handles all clients, and sends SQL strings of user activity documentation to a Python SQL server that operates a SQLite database.
 
@@ -22,8 +23,26 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
   - `Connection ID → (Subscription ID, Channel)`: getting a client's subscriptions.
 
 **StompMessagingProtocolImpl.java**
-- The core protocol logic for handling each client's communication with the server. Each client gets its own instance.
+- This class holds the core protocol logic for handling each client's communication with the server. Each client gets its own instance.
 - Receives a raw STOMP frame, parses it into its command, headers, and body.
 - Determines the appropriate action (e.g., connecting, subscribing, sending messages, disconnecting).
 - Builds and sends the corresponding response frame back to the client through the ConnectionsImpl.
 
+
+## Client Side
+**Framework (provided)**
+- The client is built on top of a course-provided networking and parsing framework.
+  - `ConnectionHandler`: handles low-level TCP socket communication - sending and receiving bytes/frames to/from the server.
+  - `Event`: defines the Event class and parses game event JSON files into Event objects using the nlohmann/json library.
+
+**StompClient.cpp**
+- This class is the main entry point for the client application.
+- Runs two threads: one reading keyboard input from the user, and one reading frames from the server.
+- Both threads share the same StompProtocol instance, which handles all logic.
+- Supports multiple login sessions - after logout, the client returns to the login prompt without restarting the application.
+
+**StompProtocol.cpp**
+- This class holds the client-side protocol's logic - mirrors the server's protocol, but from the client's perspective.
+- Translates keyboard commands (login, join, exit, report, summary, logout) into STOMP frames and sends them to the server.
+- Parses incoming server frames (CONNECTED, MESSAGE, RECEIPT, ERROR) and updates local game data or prints output to the user.
+- Maintains local storage of game event reports per user, enabling the summary command to write game summaries to a file.
