@@ -46,3 +46,9 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 - Translates keyboard commands (login, join, exit, report, summary, logout) into STOMP frames and sends them to the server.
 - Parses incoming server frames (CONNECTED, MESSAGE, RECEIPT, ERROR) and updates local game data or prints output to the user.
 - Maintains local storage of game event reports per user, enabling the summary command to write game summaries to a file.
+
+## Database
+**Framework (provided)**
+- A Python SQL server listens on a socket and executes SQL commands against a SQLite database.
+- The Java `Database` class sends SQL strings over a TCP socket to this Python server.
+- Tracks user registrations, login/logout timestamps, and file uploads reported by clients.
