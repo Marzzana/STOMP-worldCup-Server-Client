@@ -1,17 +1,14 @@
 # Description
-
 This project is a Community-led World Cup subscription system, where C++ Clients can subscribe to game channels, report, and receive updates from one another about the games.
 A Java Server acts as a message broker, routing reports between clients using the STOMP protocol, while maintaining a database of users' activity, which is implemented in SQLite.
 
 # Architecture
-
 C++ Client communicates STOMP frames over TCP to a Java server that handles all clients, and sends SQL strings of user activity documentation to a Python SQL server that operates a SQLite database.
 
 ## Server Side
-
 **Framework (provided)**
 - The server is built on top of a course-provided networking framework that supports two server patterns:
-  - Thread-Per-Client (TPC):: spawns a dedicated thread for each connected client.
+  - Thread-Per-Client (TPC): spawns a dedicated thread for each connected client.
   - Reactor: uses a single selector thread with a thread pool for non-blocking I/O.
 - Both patterns share the same protocol and connections logic, so switching between them requires no code changes - just a startup argument.
 - Key framework classes: `BaseServer`, `Reactor`, `BlockingConnectionHandler`, `NonBlockingConnectionHandler`, `ActorThreadPool`, `Server`, `ConnectionHandler`.
