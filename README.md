@@ -1,5 +1,3 @@
-![Build](https://github.com/Marzzana/STOMP-worldCup-Server-Client/actions/workflows/build.yml/badge.svg)
-
 # Description
 This project is a Community-led World Cup subscription system, where C++ Clients can subscribe to game channels, report, and receive updates from one another about the games.
 A Java Server acts as a message broker, routing reports between clients using the STOMP protocol, while maintaining a database of users' activity, which is implemented in SQLite.
