@@ -9,6 +9,13 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 
 ## Server Side
 
+**Framework (provided)**
+- The server is built on top of a course-provided networking framework that supports two server patterns:
+  - `Thread-Per-Client (TPC):`: spawns a dedicated thread for each connected client.
+  - `Reactor`: uses a single selector thread with a thread pool for non-blocking I/O.
+- Both patterns share the same protocol and connections logic, so switching between them requires no code changes - just a startup argument.
+- Key framework classes: `BaseServer`, `Reactor`, `BlockingConnectionHandler`, `NonBlockingConnectionHandler`, `ActorThreadPool`, `Server`, `ConnectionHandler`.
+
 **ConnectionsImpl.java**
 - This class manages the connection with all clients, pairing each client with a connection handler responsible for sending/receiving messages to/from other clients via the server.
 - I used three ConcurrentHashMaps to manage the clients' connection handlers and to capture the relationship between clients and game channels.
@@ -22,3 +29,4 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 - Receives a raw STOMP frame, parses it into its command, headers, and body.
 - Determines the appropriate action (e.g., connecting, subscribing, sending messages, disconnecting).
 - Builds and sends the corresponding response frame back to the client through the ConnectionsImpl.
+
