@@ -29,4 +29,8 @@ jobs:
 
     - name: Build C++ Client
       working-directory: client
+      run: mkdir -p bin && make
+      
+    - name: Build C++ Client
+      working-directory: client
       run: make
