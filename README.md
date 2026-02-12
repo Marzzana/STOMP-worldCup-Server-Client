@@ -52,3 +52,28 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 - A Python SQL server listens on a socket and executes SQL commands against a SQLite database.
 - The Java `Database` class sends SQL strings over a TCP socket to this Python server.
 - Tracks user registrations, login/logout timestamps, and file uploads reported by clients.
+
+
+# How to Run
+**SQL Server:**
+```bash
+python3 data/sql_server.py
+```
+
+**Java Server (TPC):**
+```bash
+cd server
+mvn compile
+mvn exec:java -Dexec.mainClass="bgu.spl.net.impl.stomp.StompServer" -Dexec.args="7777 tpc"
+```
+**Java Server (Reactor):**
+```bash
+mvn exec:java -Dexec.mainClass="bgu.spl.net.impl.stomp.StompServer" -Dexec.args="7777 reactor"
+```
+
+**C++ Client:**
+```bash
+cd client
+make
+./bin/StompWCIClient
+```
