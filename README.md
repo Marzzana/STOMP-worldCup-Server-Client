@@ -11,8 +11,8 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
 
 **Framework (provided)**
 - The server is built on top of a course-provided networking framework that supports two server patterns:
-  - `Thread-Per-Client (TPC):`: spawns a dedicated thread for each connected client.
-  - `Reactor`: uses a single selector thread with a thread pool for non-blocking I/O.
+  - Thread-Per-Client (TPC):: spawns a dedicated thread for each connected client.
+  - Reactor: uses a single selector thread with a thread pool for non-blocking I/O.
 - Both patterns share the same protocol and connections logic, so switching between them requires no code changes - just a startup argument.
 - Key framework classes: `BaseServer`, `Reactor`, `BlockingConnectionHandler`, `NonBlockingConnectionHandler`, `ActorThreadPool`, `Server`, `ConnectionHandler`.
 
