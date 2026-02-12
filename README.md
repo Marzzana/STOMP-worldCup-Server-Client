@@ -16,3 +16,9 @@ C++ Client communicates STOMP frames over TCP to a Java server that handles all 
   - `Connection ID → ConnectionHandler`: allows lookup of a client's handler by their ID.
   - `Channel → (Connection ID, Subscription ID)`: getting a channel's subscribers' Connection IDs and their Subscription ID.
   - `Connection ID → (Subscription ID, Channel)`: getting a client's subscriptions.
+
+**StompMessagingProtocolImpl.java**
+- The core protocol logic for handling each client's communication with the server. Each client gets its own instance.
+- Receives a raw STOMP frame, parses it into its command, headers, and body.
+- Determines the appropriate action (e.g., connecting, subscribing, sending messages, disconnecting).
+- Builds and sends the corresponding response frame back to the client through the ConnectionsImpl.
